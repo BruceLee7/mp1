@@ -14,7 +14,6 @@ $nav-h: 88px;
 $nav-h-shrink: 56px;
 $ease: 200ms ease;
 
-/* ===== Mixins ===== */
 @mixin container { width: min(100% - 2rem, #{$maxw}); margin-inline: auto; }
 @mixin mq($max) { @media (max-width: $max) { @content; } }
 @mixin btn($bg, $fg:#fff) {
@@ -25,22 +24,18 @@ $ease: 200ms ease;
   &:active{ opacity:.9; transform: none; }
 }
 
-/* ===== Keyframes ===== */
 @keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 
-/* ===== Base ===== */
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{ margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,'PingFang SC','Noto Sans CJK SC',sans-serif; color:$text; background:#fff; }
 img{ max-width:100%; display:block; }
 a{ color:inherit; text-decoration:none; }
 
-/* ===== Layout ===== */
 .container{ @include container; }
 .section{ padding:96px 0; &.alt{ background:$light; } }
 .section-title{ text-align:center; margin:0 0 2rem; font-size:clamp(1.6rem,1rem + 2vw,2.3rem); }
 
-/* ===== Navbar (sticky + resize) ===== */
 .site-nav {
     position: sticky; top: 0; z-index: 1000;
     background: $dark; color: #fff;
@@ -58,9 +53,9 @@ a{ color:inherit; text-decoration:none; }
     .brand { 
       font-weight: 800; 
       letter-spacing: .5px; 
-      font-size: 1.5rem;   // 初始大字体
+      font-size: 1.5rem;   
       transition: font-size $ease, padding $ease;
-      padding: 1.2rem 0;   // 初始 padding 宽松
+      padding: 1.2rem 0;   
     }
   
     .menu {
@@ -71,7 +66,7 @@ a{ color:inherit; text-decoration:none; }
       padding: 0; margin: 0;
       a {
         display: block; 
-        padding: 1rem 1.25rem;  // 初始大一点
+        padding: 1rem 1.25rem;  
         font-size: 1.125rem;
         border-radius: .5rem; 
         opacity: .85;
@@ -88,12 +83,12 @@ a{ color:inherit; text-decoration:none; }
       box-shadow: 0 6px 16px rgba(0,0,0,.08);
   
       .brand {
-        font-size: 1.2rem;   // 缩小
+        font-size: 1.2rem; 
         padding: .6rem 0;
       }
   
       .menu a {
-        font-size: 1rem;     // 缩小
+        font-size: 1rem;
         padding: .5rem 1rem;
       }
     }
@@ -101,7 +96,6 @@ a{ color:inherit; text-decoration:none; }
   
   
 
-/* ===== Hero (video background, centered) ===== */
 .hero{
   position:relative; color:#fff; text-align:center; min-height:calc(100dvh - #{$nav-h});
   display:grid; place-items:center; overflow:hidden;
@@ -115,7 +109,6 @@ a{ color:inherit; text-decoration:none; }
   .hero-inner > *{ animation: fadeInUp .6s ease both; }
 }
 
-/* ===== Portfolio Grid ===== */
 .grid-portfolio{
   display:grid; gap:1rem; grid-template-columns:repeat(3,1fr);
   @include mq($bp-sm){ grid-template-columns:repeat(2,1fr); }
@@ -128,7 +121,6 @@ a{ color:inherit; text-decoration:none; }
   span{ font-weight:700; padding:.25rem 0 .5rem; }
 }
 
-/* ===== Carousel (3+ slides, arrows, drag/swipe) ===== */
 .carousel{ position:relative; }
 .viewport{ overflow:hidden; border-radius:.75rem; box-shadow:0 6px 18px rgba(0,0,0,.06); }
 .track{ display:flex; transition:transform 400ms ease; will-change:transform; }
@@ -141,7 +133,7 @@ a{ color:inherit; text-decoration:none; }
   font-weight:700; letter-spacing:.5px; text-align:center; text-shadow:0 2px 6px rgba(0,0,0,.6);
   font-size:clamp(1.2rem,1rem + 1vw,2rem);
 }
-/* arrow controls over image */
+
 .ctrl{
   position:absolute; top:0; bottom:0; width:15%; background:transparent; color:#fff;
   border:0; font-size:2.6rem; display:flex; align-items:center; justify-content:center;
@@ -151,13 +143,11 @@ a{ color:inherit; text-decoration:none; }
 .prev{ left:0; justify-content:flex-start; padding-left:1rem; }
 .next{ right:0; justify-content:flex-end; padding-right:1rem; }
 
-/* ===== Parallax section (fixed bg image) ===== */
 .parallax{
   background:url('../assets/images/parallax.jpg') center/cover fixed no-repeat; padding:0;
   .parallax-overlay{ background:rgba(0,0,0,.35); min-height:60vh; display:grid; place-items:center; color:#fff; text-align:center; }
 }
 
-/* ===== About (multi-column via grid cards) ===== */
 .about-grid{
   display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-bottom:2rem;
   @include mq($bp-sm){ grid-template-columns:1fr 1fr; }
@@ -172,10 +162,8 @@ a{ color:inherit; text-decoration:none; }
   &:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(0,0,0,.1); }
 }
 
-/* ===== Buttons ===== */
 .btn{ @include btn($dark); &.primary{ @include btn($primary,#fff); } }
 
-/* ===== Contact ===== */
 .contact-form{
   display:grid; gap:1rem; max-width:640px; margin-inline:auto;
   input,textarea{ width:100%; padding:.9rem 1rem; border-radius:.75rem; border:1px solid #e4e7eb; outline:none;
@@ -183,7 +171,6 @@ a{ color:inherit; text-decoration:none; }
   }
 }
 
-/* ===== Footer (with social icons) ===== */
 .footer{
   background:$dark; color:#fff; text-align:center; padding:2rem 0;
   .social{ display:flex; gap:1rem; justify-content:center; margin-bottom:.75rem;
@@ -192,7 +179,6 @@ a{ color:inherit; text-decoration:none; }
   }
 }
 
-/* ===== Modal (polished) ===== */
 .modal{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.65); z-index:2000;
   &.open{ display:grid; animation: fadeInUp .25s ease; }
 }

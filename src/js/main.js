@@ -5,11 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = [...document.querySelectorAll('[data-nav]')];
     const sections = [...document.querySelectorAll('main > section, main > header')];
   
-    /* ===== Mobile menu ===== */
     toggle?.addEventListener('click', () => menu.classList.toggle('open'));
     navLinks.forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
   
-    /* ===== Smooth scroll with offset ===== */
     navLinks.forEach(a => {
       a.addEventListener('click', (e) => {
         const id = a.getAttribute('href');
@@ -23,14 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   
-    /* ===== Navbar resize ===== */
     const onScrollResizeNav = () => {
       const threshold = 80;
       if (window.scrollY > threshold) nav.classList.add('shrink');
       else nav.classList.remove('shrink');
     };
-  
-    /* ===== ScrollSpy (position indicator) ===== */
+
     let activeId = '';
     const onScrollSpy = () => {
       const navBottom = nav.getBoundingClientRect().bottom;
@@ -45,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
   
-    /* combine scroll handlers */
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
@@ -58,8 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll(); // init
-  
-    /* ===== Carousel (arrows + drag/swipe + keyboard) ===== */
+
     const carousel = document.querySelector('.carousel');
     if (carousel) {
       const track = carousel.querySelector('.track');
@@ -123,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
       go(0);
     }
   
-    /* ===== Modals (open/close + ESC + background click) ===== */
     const modals = document.querySelectorAll('.modal');
     const openers = document.querySelectorAll('[data-open-modal]');
     const closers = document.querySelectorAll('[data-close-modal]');
