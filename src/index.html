@@ -1,13 +1,288 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MP1</title>
-    </head>
-    <body>
-        <h1>Hello World! Welcome to MP1!</h1>
-        <img src="assets/image.jpg">
-    </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Discover Chengdu & Sichuan Culture</title>
+
+  <!-- Font Awesome (vector icons) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Navbar (sticky) -->
+  <nav class="site-nav" id="siteNav">
+    <div class="container nav-inner">
+      <a class="brand" href="#home">Chengdu</a>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="menu" id="navMenu">
+        <li><a href="#home" data-nav>Home</a></li>
+        <li><a href="#portfolio" data-nav>Food</a></li>
+        <li><a href="#culture" data-nav>Culture</a></li>
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#video" data-nav>Video</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="home">
+    <!-- Hero (video background, vertically centered) -->
+    <header class="hero section" id="home">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <source src="assets/video/video.MP4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+      </video>
+      <div class="overlay"></div>
+      <div class="container hero-inner">
+        <div class="avatar" aria-hidden="true"><i class="fa-solid fa-dragon"></i></div>
+        <h1 class="title">Discover Chengdu & Sichuan</h1>
+        <p class="subtitle">Food · Culture · Heritage</p>
+        <a class="btn primary" href="#portfolio">Explore</a>
+      </div>
+    </header>
+
+    <!-- Food (portfolio grid) -->
+    <section class="section alt" id="portfolio">
+      <div class="container">
+        <h2 class="section-title">Sichuan Food Highlights</h2>
+        <div class="grid-portfolio">
+          <button class="card" data-open-modal="hotpot">
+            <img class="thumb" src="assets/images/caption.jpg" alt="Hotpot" />
+            <span>Hotpot</span>
+          </button>
+          <button class="card" data-open-modal="mapo">
+            <img class="thumb" src="assets/images/mapo.avif" alt="Mapo Tofu" />
+            <span>Mapo Tofu</span>
+          </button>
+          <button class="card" data-open-modal="dandan">
+            <img class="thumb" src="assets/images/dandan.jpg" alt="Dandan Noodles" />
+            <span>Dandan Noodles</span>
+          </button>
+          <button class="card" data-open-modal="chuanchuan">
+            <img class="thumb" src="assets/images/chuan.jpg" alt="Chuan Chuan" />
+            <span>Chuan Chuan</span>
+          </button>
+          <button class="card" data-open-modal="twice">
+            <img class="thumb" src="assets/images/twice.jpg" alt="Twice-cooked pork" />
+            <span>Twice-cooked Pork</span>
+          </button>
+          <button class="card" data-open-modal="tofu">
+            <img class="thumb" src="assets/images/tofu.jpg" alt="Tofu pudding" />
+            <span>Tofu Pudding</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Culture (carousel with arrows + drag/swipe) -->
+    <section class="section" id="culture">
+      <div class="container">
+        <h2 class="section-title">Cultural Experiences</h2>
+
+        <div class="carousel" tabindex="0" aria-roledescription="carousel">
+          <button class="ctrl prev" aria-label="Previous slide">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div class="viewport">
+            <div class="track">
+              <div class="slide">
+                <div class="slide-inner" data-open-modal="jinli">
+                  <img class="slide-img" src="assets/images/jinli.jpg" alt="Jinli Ancient Street" />
+                  <div class="caption">Jinli Ancient Street</div>
+                </div>
+              </div>
+
+              <div class="slide">
+                <div class="slide-inner" data-open-modal="opera">
+                  <img class="slide-img" src="assets/images/face.jpeg" alt="Sichuan Opera face-changing" />
+                  <div class="caption">Sichuan Opera & Face Changing</div>
+                </div>
+              </div>
+
+              <div class="slide">
+                <div class="slide-inner" data-open-modal="panda">
+                  <img class="slide-img" src="assets/images/panda.jpg" alt="Chengdu Panda Base" />
+                  <div class="caption">Giant Panda Base</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="ctrl next" aria-label="Next slide">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parallax (fixed background image) -->
+    <section class="section parallax">
+      <div class="parallax-overlay">
+        <div class="center-vertical">
+          <h2 class="section-title">A City of Tradition & Modernity</h2>
+          <p>Walk through ancient streets and experience vibrant modern life.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About (multi-column via grid cards) -->
+    <section class="section alt" id="about">
+      <div class="container">
+        <h2 class="section-title">About Chengdu</h2>
+        <div class="about-grid">
+          <div class="about-card">
+            <i class="fa-solid fa-pepper-hot"></i>
+            <h3>Food & Lifestyle</h3>
+            <p>UNESCO City of Gastronomy—spicy cuisine, teahouses, and a famously laid-back vibe.</p>
+          </div>
+          <div class="about-card">
+            <i class="fa-solid fa-landmark"></i>
+            <h3>History & Heritage</h3>
+            <p>Relics of the Shu Kingdom and living traditions like Sichuan opera’s face-changing.</p>
+          </div>
+          <div class="about-card">
+            <i class="fa-solid fa-city"></i>
+            <h3>Modern Chengdu</h3>
+            <p>Ancient temples meet futuristic skylines—a city balancing tradition and innovation.</p>
+          </div>
+        </div>
+        <a class="btn" data-open-modal="aboutMore">Learn More</a>
+      </div>
+    </section>
+
+    <!-- Inline section with HTML5 video (assignment requirement) -->
+    <section class="section" id="video">
+      <div class="container">
+        <h2 class="section-title">Promotional Video</h2>
+        <video controls playsinline preload="metadata" width="100%">
+          <source src="assets/video/hero.mp4" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section alt" id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <form class="contact-form" onsubmit="return false;">
+          <input type="text" placeholder="Name" required />
+          <input type="email" placeholder="Email" required />
+          <textarea rows="4" placeholder="Message"></textarea>
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer with social icons -->
+  <footer class="footer">
+    <div class="container">
+      <div class="social">
+        <a href="https://github.com/BruceLee7" target="_blank"><i class="fa-brands fa-github"></i></a>
+<a href="https://www.linkedin.com/in/luyun-li7/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+<a href="https://twitter.com" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+
+      </div>
+      <small>&copy; 2025 Discover Chengdu</small>
+    </div>
+  </footer>
+
+  <!-- Food Modals -->
+  <div class="modal" id="modal-hotpot">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Hotpot</h3>
+      <img src="assets/images/caption.jpg" alt="Hotpot" />
+      <p>Sichuan hotpot blends chili and peppercorns into a numbing, spicy feast—a social ritual of sharing.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-mapo">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Mapo Tofu</h3>
+      <img src="assets/images/mapo.avif" alt="Mapo Tofu" />
+      <p>Silky tofu, minced beef, and fermented bean paste—bold, fragrant, and classically Sichuan.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-dandan">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Dandan Noodles</h3>
+      <img src="assets/images/dandan.jpg" alt="Dandan Noodles" />
+      <p>Street-food favorite with spicy sauce, ground pork, and preserved veggies over fresh noodles.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-chuanchuan">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Chuan Chuan</h3>
+      <img src="assets/images/chuan.jpg" alt="Chuan Chuan" />
+      <p>Endless skewers simmered in spicy broth—choose, cook, and dip. A beloved late-night ritual.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-twice">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Twice-cooked Pork</h3>
+      <img src="assets/images/twice.jpg" alt="Twice-cooked pork" />
+      <p>Pork belly is simmered then stir-fried with peppers and spicy bean paste—smoky and irresistible.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-tofu">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Tofu Pudding</h3>
+      <img src="assets/images/tofu.jpg" alt="Tofu pudding" />
+      <p>Silky dessert served sweet or savory—simple, soothing, and beloved across Sichuan.</p>
+    </div>
+  </div>
+
+  <!-- Culture Modals -->
+  <div class="modal" id="modal-jinli">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Jinli Ancient Street</h3>
+      <img src="assets/images/jinli.jpg" alt="Jinli Ancient Street" />
+      <p>Qing-style facades, crafts, snacks, and nightly performances—a stroll through living history.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-opera">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Sichuan Opera</h3>
+      <img src="assets/images/face.jpeg" alt="Sichuan Opera" />
+      <p>Face-changing, fiery percussion, and dazzling costumes—Chengdu’s signature stage craft.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-panda">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>Giant Panda Base</h3>
+      <img src="assets/images/panda.jpg" alt="Giant Panda Base" />
+      <p>A world-renowned conservation center dedicated to breeding and research of giant pandas.</p>
+    </div>
+  </div>
+
+  <!-- About Modal -->
+  <div class="modal" id="modal-aboutMore">
+    <div class="modal-dialog">
+      <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+      <h3>More About Chengdu</h3>
+      <p>From ancient Shu artifacts to cutting-edge districts, Chengdu blends depth with dynamism.</p>
+    </div>
+  </div>
+</body>
 </html>

@@ -1,1 +1,210 @@
-/* Your SCSS here. */
+/* ===== Variables ===== */
+$bp-xl: 1920px;
+$bp-lg: 1366px;
+$bp-md: 1280px;
+$bp-sm: 1024px;
+
+$primary: #d32f2f;
+$dark: #2c3e50;
+$light: #f7f8f9;
+$text: #2b2b2b;
+
+$maxw: 1100px;
+$nav-h: 88px;
+$nav-h-shrink: 56px;
+$ease: 200ms ease;
+
+/* ===== Mixins ===== */
+@mixin container { width: min(100% - 2rem, #{$maxw}); margin-inline: auto; }
+@mixin mq($max) { @media (max-width: $max) { @content; } }
+@mixin btn($bg, $fg:#fff) {
+  display:inline-block; padding:.9rem 1.4rem; border-radius:.8rem;
+  background:$bg; color:$fg; font-weight:700; text-decoration:none;
+  transition: transform $ease, opacity $ease;
+  &:hover{ transform: translateY(-1px); }
+  &:active{ opacity:.9; transform: none; }
+}
+
+/* ===== Keyframes ===== */
+@keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== Base ===== */
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{ margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,'PingFang SC','Noto Sans CJK SC',sans-serif; color:$text; background:#fff; }
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+
+/* ===== Layout ===== */
+.container{ @include container; }
+.section{ padding:96px 0; &.alt{ background:$light; } }
+.section-title{ text-align:center; margin:0 0 2rem; font-size:clamp(1.6rem,1rem + 2vw,2.3rem); }
+
+/* ===== Navbar (sticky + resize) ===== */
+.site-nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: $dark; color: #fff;
+    transition: all $ease;
+    min-height: $nav-h;
+  
+    .nav-inner { 
+      @include container; 
+      display: flex; 
+      align-items: center; 
+      gap: 1rem; 
+      transition: padding $ease; 
+    }
+  
+    .brand { 
+      font-weight: 800; 
+      letter-spacing: .5px; 
+      font-size: 1.5rem;   // 初始大字体
+      transition: font-size $ease, padding $ease;
+      padding: 1.2rem 0;   // 初始 padding 宽松
+    }
+  
+    .menu {
+      margin-left: auto; 
+      display: flex; 
+      gap: 1rem; 
+      list-style: none; 
+      padding: 0; margin: 0;
+      a {
+        display: block; 
+        padding: 1rem 1.25rem;  // 初始大一点
+        font-size: 1.125rem;
+        border-radius: .5rem; 
+        opacity: .85;
+        transition: font-size $ease, padding $ease, background $ease;
+        &.active, &:hover { 
+          background: rgba(255,255,255,.12); 
+          opacity: 1; 
+        }
+      }
+    }
+  
+    &.shrink { 
+      min-height: $nav-h-shrink; 
+      box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  
+      .brand {
+        font-size: 1.2rem;   // 缩小
+        padding: .6rem 0;
+      }
+  
+      .menu a {
+        font-size: 1rem;     // 缩小
+        padding: .5rem 1rem;
+      }
+    }
+  }
+  
+  
+
+/* ===== Hero (video background, centered) ===== */
+.hero{
+  position:relative; color:#fff; text-align:center; min-height:calc(100dvh - #{$nav-h});
+  display:grid; place-items:center; overflow:hidden;
+  .hero-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .overlay{ position:absolute; inset:0; background:rgba(0,0,0,.45); z-index:1; }
+  .hero-inner{ position:relative; z-index:2; display:grid; place-items:center; gap:1.5rem; }
+  .avatar{ width:160px; height:160px; border-radius:50%; background:rgba(0,0,0,.35); display:grid; place-items:center; font-size:4.5rem; }
+  .title{ margin:.5rem 0 0; letter-spacing:1px; font-size:clamp(2.6rem,1.8rem + 2vw,4rem); text-shadow:0 2px 8px rgba(0,0,0,.8); }
+  .subtitle{ margin:0 0 .5rem; font-size:clamp(1.25rem,1rem + 1vw,1.8rem); text-shadow:0 2px 8px rgba(0,0,0,.8); }
+  .btn{ @include btn($primary,#fff); font-size:1.1rem; padding:1rem 2rem; }
+  .hero-inner > *{ animation: fadeInUp .6s ease both; }
+}
+
+/* ===== Portfolio Grid ===== */
+.grid-portfolio{
+  display:grid; gap:1rem; grid-template-columns:repeat(3,1fr);
+  @include mq($bp-sm){ grid-template-columns:repeat(2,1fr); }
+  @include mq(600px){ grid-template-columns:1fr; }
+}
+.card{
+  border-radius:.75rem; overflow:hidden; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.06);
+  display:grid; place-items:center; padding:1rem; gap:.5rem; cursor:pointer;
+  .thumb{ width:100%; aspect-ratio:1 / 1; object-fit:cover; border-radius:.5rem; }
+  span{ font-weight:700; padding:.25rem 0 .5rem; }
+}
+
+/* ===== Carousel (3+ slides, arrows, drag/swipe) ===== */
+.carousel{ position:relative; }
+.viewport{ overflow:hidden; border-radius:.75rem; box-shadow:0 6px 18px rgba(0,0,0,.06); }
+.track{ display:flex; transition:transform 400ms ease; will-change:transform; }
+.slide{ min-width:100%; }
+.slide-inner{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
+.slide-img{ width:100%; height:100%; object-fit:cover; user-select:none; -webkit-user-drag:none; }
+.caption{
+  position:absolute; left:50%; bottom:1rem; transform:translateX(-50%);
+  background:rgba(0,0,0,.55); color:#fff; padding:.6rem 1.2rem; border-radius:.5rem;
+  font-weight:700; letter-spacing:.5px; text-align:center; text-shadow:0 2px 6px rgba(0,0,0,.6);
+  font-size:clamp(1.2rem,1rem + 1vw,2rem);
+}
+/* arrow controls over image */
+.ctrl{
+  position:absolute; top:0; bottom:0; width:15%; background:transparent; color:#fff;
+  border:0; font-size:2.6rem; display:flex; align-items:center; justify-content:center;
+  opacity:.65; z-index:2; transition: opacity .3s ease, background .3s ease; cursor:pointer;
+}
+.ctrl:hover{ opacity:1; background:rgba(0,0,0,.25); }
+.prev{ left:0; justify-content:flex-start; padding-left:1rem; }
+.next{ right:0; justify-content:flex-end; padding-right:1rem; }
+
+/* ===== Parallax section (fixed bg image) ===== */
+.parallax{
+  background:url('../assets/images/parallax.jpg') center/cover fixed no-repeat; padding:0;
+  .parallax-overlay{ background:rgba(0,0,0,.35); min-height:60vh; display:grid; place-items:center; color:#fff; text-align:center; }
+}
+
+/* ===== About (multi-column via grid cards) ===== */
+.about-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-bottom:2rem;
+  @include mq($bp-sm){ grid-template-columns:1fr 1fr; }
+  @include mq(700px){ grid-template-columns:1fr; }
+}
+.about-card{
+  background:#fff; border-radius:1rem; padding:2rem 1.5rem; text-align:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.06); transition: transform .25s ease, box-shadow .25s ease;
+  i{ font-size:2.5rem; color:$primary; margin-bottom:1rem; }
+  h3{ margin:.5rem 0 1rem; font-size:1.3rem; font-weight:800; }
+  p{ font-size:1rem; line-height:1.6; opacity:.9; }
+  &:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(0,0,0,.1); }
+}
+
+/* ===== Buttons ===== */
+.btn{ @include btn($dark); &.primary{ @include btn($primary,#fff); } }
+
+/* ===== Contact ===== */
+.contact-form{
+  display:grid; gap:1rem; max-width:640px; margin-inline:auto;
+  input,textarea{ width:100%; padding:.9rem 1rem; border-radius:.75rem; border:1px solid #e4e7eb; outline:none;
+    &:focus{ border-color:$primary; box-shadow:0 0 0 3px rgba($primary,.18); }
+  }
+}
+
+/* ===== Footer (with social icons) ===== */
+.footer{
+  background:$dark; color:#fff; text-align:center; padding:2rem 0;
+  .social{ display:flex; gap:1rem; justify-content:center; margin-bottom:.75rem;
+    a{ width:40px; height:40px; display:grid; place-items:center; border-radius:50%; background:rgba(255,255,255,.1); }
+    a:hover{ background:rgba(255,255,255,.2); }
+  }
+}
+
+/* ===== Modal (polished) ===== */
+.modal{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.65); z-index:2000;
+  &.open{ display:grid; animation: fadeInUp .25s ease; }
+}
+.modal-dialog{
+  background:#fff; color:$text; border-radius:1rem; width:min(700px,90%); padding:2rem; position:relative;
+  box-shadow:0 20px 40px rgba(0,0,0,.25); text-align:center;
+  h3{ font-size:1.8rem; margin-bottom:1rem; font-weight:800; display:inline-block; padding-bottom:.5rem; }
+  h3::after{ content:"★"; display:block; margin-top:.5rem; font-size:1.2rem; color:$primary; }
+  img{ width:100%; max-height:320px; object-fit:cover; border-radius:.75rem; margin-bottom:1rem; }
+  p{ font-size:1rem; line-height:1.6; margin:0 auto; max-width:600px; }
+}
+.modal-close{
+  position:absolute; top:1rem; right:1rem; border:0; background:transparent; font-size:1.5rem; cursor:pointer; color:#666;
+  transition: color .2s; &:hover{ color:$primary; }
+}
